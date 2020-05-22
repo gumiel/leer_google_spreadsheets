@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
+    
+  <script
+  src="jquery.csv.js"></script>
+  <script>
+    $(document).ready(function(){
+        $.ajax({
+            url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQD32FS1_p5_js5xJOAHO35K0ush1nVVHpld19TOAdO3BJEXMKDjgdO_rIcOx-iB4hUi5EeokR_qaIZ/pub?output=csv',
+            dataType: 'text',
+        }).done(function(res){
+            // successFunction(res)
+            var data = $.csv.toObjects(res);
+            console.log(data);
+            crearHead(data)
+            successFunction(data);
+        });
+    });
+
+    function crearHead(data){
+        var allRows = data;
+        var thead = ''
+        thead += '<tr>';
+        for (var key in allRows[0]) {
+            
+            thead += '    <th>';
+            thead += key;
+            thead += '    </th>';
+        }   
+        thead += '</tr>';
+        $('thead').append(thead);
+    }
+
+    function successFunction(data) {
+        
+        var allRows = data;
+
+        var tbody = '';
+            
+
+        for (var i = 0; i < allRows.length; i++) {
+            
+            // alert(allRows.length)
+            tbody += '<tr '+i+'>';
+            for (var key in allRows[i]){
+                if(key=='ItemImageURL'){
+                    tbody += '<td><img src="'+allRows[i][key]+'" /></td>';
+
+                }else{
+                    tbody += '<td>'+allRows[i][key]+'</td>';
+                }
+            }
+            tbody += '</tr>';
+
+        } 
+
+        $('tbody').append(tbody);
+    }
+  </script>
+</head>
+<body>
+
+    <table border="1">
+        <thead>
+
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+    
+</body>
+</html>

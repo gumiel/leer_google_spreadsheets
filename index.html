@@ -1,81 +1,614 @@
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script
-  src="https://code.jquery.com/jquery-3.5.1.min.js"
-  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-  crossorigin="anonymous"></script>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta http-equiv="cache-control" content="no-cache">
+        <meta http-equiv="expires" content="0">
+        <meta http-equiv="pragma" content="no-cache">
+        <title>Order on WhatsApp from Kitchen J & S</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+        <!-- script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+        <noscript><p>Please enable JavaScript in your browser for use of the website.</p></noscript>
+        <script src="jquery.csv.js"></script>
+    <script>
+    var view = [
+                {
+                    "Item":"Poha",
+                    "Category":"Breakfast",
+                    "Caption":"2 Pieces",
+                    "ItemImageURL":"Https:\/\/i.ndtvimg.com\/i\/2017-08\/bread-poha_240x180_81503556243.jpg",
+                    "Price":"20",
+                    "Veg":"",
+                    "Available":"Yes"
+                },
+                {"Item":"Vada","Category":"Breakfast","Caption":"2 Pieces","ItemImageURL":"Https:\/\/i.ndtvimg.com\/i\/2018-02\/vade_240x180_71519366784.jpg","Price":"40","Veg":"","Available":"Yes"},{"Item":"Cutlet","Category":"Breakfast","Caption":"2 Pieces","ItemImageURL":"Https:\/\/c.ndtvimg.com\/2019-05\/bp793k0o_cutlets_120x90_31_May_19.jpg","Price":"50","Veg":"","Available":"Yes"},{"Item":"Sada Dosa","Category":"Breakfast","Caption":"3 Pieces","ItemImageURL":"Https:\/\/c.ndtvimg.com\/2019-06\/h88tnfao_ghee-roast-quesadilla-dosa_120x90_11_June_19.jpg","Price":"30","Veg":"","Available":"Yes"},{"Item":"Masala Dosa","Category":"Breakfast","Caption":"2 Pieces","ItemImageURL":"Https:\/\/c.ndtvimg.com\/2019-11\/33vo07c_dosa_240x180_16_November_19.jpg","Price":"60","Veg":"","Available":"Yes"},{"Item":"Mysore Sada Dosa","Category":"Breakfast","Caption":"2 Pieces","ItemImageURL":"Https:\/\/i.ndtvimg.com\/i\/2015-01\/masala-dosa_240x180_81422447203.jpg","Price":"70","Veg":"","Available":"Yes"},{"Item":"Thali","Category":"Lunch","Caption":"2 Sabji, Dal, Rice & 4 Chapatis","ItemImageURL":"Https:\/\/i.ndtvimg.com\/i\/2017-05\/karnataka-food-centre-620x350_240x180_61495091025.jpg","Price":"120","Veg":"","Available":"Yes"},{"Item":"Veg Aloo","Category":"Main Course","Caption":"Sizzling Spicy","ItemImageURL":"Https:\/\/www.ndtv.com\/cooks\/images\/ALOO.BAINGAN.4567.000%281%29.jpg","Price":"60","Veg":"","Available":"Yes"},{"Item":"Kulfi","Category":"Dessert","Caption":"Sweet Dish","ItemImageURL":"Https:\/\/i.ndtvimg.com\/i\/2017-08\/mango-pista-kulfi_300x200_71503644265.jpg","Price":"40","Veg":"","Available":"Yes"},{"Item":"Ginger Ale","Category":"Beverages","Caption":"Refreshing Drink","ItemImageURL":"Https:\/\/www.ndtv.com\/cooks\/images\/Ginger.Ale-620.jpg","Price":"70","Veg":"","Available":"Yes"},{"Item":"Chicken Afghani","Category":"Main Course","Caption":"Vegetables Spiced Up","ItemImageURL":"Https:\/\/c.ndtvimg.com\/2018-09\/1kcuvkv8_chicken_120x90_18_September_18.jpg","Price":"160","Veg":"","Available":"Yes"}];
     
-  <script
-  src="jquery.csv.js"></script>
-  <script>
     $(document).ready(function(){
         $.ajax({
             url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQD32FS1_p5_js5xJOAHO35K0ush1nVVHpld19TOAdO3BJEXMKDjgdO_rIcOx-iB4hUi5EeokR_qaIZ/pub?output=csv',
             dataType: 'text',
+            async: false,
         }).done(function(res){
             // successFunction(res)
-            var data = $.csv.toObjects(res);
-            console.log(data);
-            crearHead(data)
-            successFunction(data);
+            view = $.csv.toObjects(res);
+
         });
     });
-
-    function crearHead(data){
-        var allRows = data;
-        var thead = ''
-        thead += '<tr>';
-        for (var key in allRows[0]) {
-            
-            thead += '    <th>';
-            thead += key;
-            thead += '    </th>';
-        }   
-        thead += '</tr>';
-        $('thead').append(thead);
-    }
-
-    function successFunction(data) {
-        
-        var allRows = data;
-
-        var tbody = '';
-            
-
-        for (var i = 0; i < allRows.length; i++) {
-            
-            // alert(allRows.length)
-            tbody += '<tr '+i+'>';
-            for (var key in allRows[i]){
-                if(key=='ItemImageURL'){
-                    tbody += '<td><img src="'+allRows[i][key]+'" /></td>';
-
-                }else{
-                    tbody += '<td>'+allRows[i][key]+'</td>';
-                }
-            }
-            tbody += '</tr>';
-
-        } 
-
-        $('tbody').append(tbody);
-    }
-  </script>
-</head>
-<body>
-
-    <table border="1">
-        <thead>
-
-        </thead>
-        <tbody>
-            
-        </tbody>
-    </table>
     
-</body>
-</html>
+                var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+    //$("#wohref").prop('disabled', true);
+    var waddr = "";
+    var cartM = "";
+    var cartV = 0;
+    var minV = 40 || 0;
+    var catArray = [];
+    var payMode = 'Show Note';
+    var payNote = 'Payment options can be selected when creating your own WhatsOrder page.';
+    var lang = 'en';
+    var perC = "5%";
+    perC = cleanP(perC);
+    
+    function cleanP(perC2){
+    if (perC2.indexOf("%") > -1) {
+        perC2.replace("%","").replace(" ", "");
+        return 1+(parseInt(perC2)/100);
+    } else {return 1;}
+    }
+    
+    var amtPayable = 0;
+    var delC = 0;
+    
+    function checkPageFocus() {
+    if (document.hasFocus()) {
+    var now = new Date().getTime();
+    var last = localStorage.getItem('wolastupdate');
+    //alert(last);
+    if (last == null){
+        localStorage.setItem('wolastupdate', now);
+        last = now;
+    }
+    if (last) {
+      var diff = now - last;
+      var mins = Math.floor(diff / 60000);
+      console.log(mins);
+      if (mins > 60){
+          //alert('Page refresh required. '+mins+ ' mins old page.');
+          $("#worefresh").text('... ...');
+          $("#worefresh").show();
+          location.reload(true);
+        localStorage.setItem('wolastupdate', now);
+      }else{
+        //alert('save');  
+        localStorage.setItem('wolastupdate', now);
+      }
+    }
+    } // document has focus
+    } setInterval(checkPageFocus, 1000);
+    
+    var blurred = false;
+    window.onblur = function() { blurred = true; }
+    window.onfocus = function() { blurred && (ifAt()); }
+    
+    function ifAt(){
+        if(cartArray.length<1){
+            location.reload(true);
+            console.log('refreshed');
+        }
+    }
+    
+    function toTitle(str) {
+        return str.replace(/(?:^|\s)\w/g, function(match) {
+            return match.toUpperCase();
+        });
+    }
+    
+    function urlencode(str) {
+    
+      str = (str + '')
+    
+      return encodeURIComponent(str)
+        .replace(/!/g, '%21')
+        .replace(/'/g, '%27')
+        .replace(/\(/g, '%28')
+        .replace(/\)/g, '%29')
+        .replace(/\*/g, '%2A')
+        .replace(/~/g, '%7E')
+        .replace(/%20/g, '+')
+    } // end of urlencode
+    
+    function showStext(){
+        $("input#wosearch").val('');
+        $("li.woitemimage").show();
+        $("#catList").toggle();
+        $("#wosearchdiv").toggle();
+        $("#items .title").toggle();
+        $("input#wosearch").focus();
+    }
+    
+    function checkIt(){
+        //alert(cartV);
+        if('no' == 'no'){
+            //shop closed
+            notifyC("Please note the shop is closed", "info");
+        }
+        if(cartV < minV && (!document.getElementById('wopic').checked)){
+            // minimum order value
+            notifyC("Minimum order value is "+minV, "warning");
+            return false;   
+        }
+        if((waddr.trim() !== "")&&(cartArray.length>0)){
+            $("#wohref").addClass("is-loading");
+            $("#worefresh").show();
+            return true;
+        } else {
+            if(cartArray.length<1){
+                //check cart
+            notifyC("Please check cart", "warning");
+            return false;
+            } else if (waddr.trim() === ""){
+                //check address
+            notifyC("Please check address", "warning");
+            return false;            
+            }
+        }
+    }
+    
+    $(document).ready(function(){
+        
+        if (localStorage.woaddress1) {
+            waddr = JSON.parse(localStorage.woaddress1);
+            document.getElementById('woname').value = waddr.name;
+            document.getElementById('womobile').value = waddr.contact;
+            document.getElementById('woaddress').value = waddr.addr1;
+            document.getElementById('wolandmark').value = waddr.addr2;
+            updateWOaddress();
+            //waddr = buildAddr(waddr);
+        }
+        
+        $.each(view, function (index) {
+        var categ = view[index].Category;
+        if ($.inArray(categ, catArray) == -1) {
+            catArray.push(categ);
+        }
+        });
+        var $catTab = $("#catList");
+        $.each(catArray, function (i) {
+        $catTab.append('<li><a href="#' + catArray[i].replace(/\s+/g,"-") + '">' + catArray[i] + '</a></li>');
+        });
+        
+        var gview = view.reduce(function(result, current) {
+        result[current.Category] = result[current.Category] || [];
+        result[current.Category].push(current);
+        return result;
+        }, {});
+        //console.log(JSON.stringify(gview));
+        //alert(gview.Breakfast[0].Item);
+        
+        var gmenu = "";
+        var suf = "";
+        $.each(gview, function(gindex) {
+            gmenu += '<h3 style="margin-top:20px;" class="title is-5" id='+ gindex.replace(/\s+/g,"-") +'>' + gindex + '</h3>';
+            $.each(gview[gindex], function(ggindex) {
+                //console.log(this.Item);
+                if((this.Available).trim().toLowerCase()=="yes"){
+                var veg = (this.Veg).trim().toLowerCase();
+                if(veg==="yes"){
+                //suf="<img src='https://img.icons8.com/color/16/000000/vegetarian-food-symbol.png'>";
+                suf='<span style="font-size:1.1em;color:#439547;">&#9679</span>';
+                } else if(veg==="no"){
+                //suf="<img src='https://img.icons8.com/color/16/000000/non-vegetarian-food-symbol.png'>";
+                suf='<span style="font-size:1.1em;color:#BF360C;">&#9679</span>';
+                } else {
+                suf = "";
+                }
+                gmenu += '<li class="box is-marginless woitemimage" style="background-image: url('+this.ItemImageURL+'); margin-top:5px !important;" data-item='+toTitle(this.Item)+' data-price='+this.Price+'><a onClick="javascript:updateC(\''+toTitle(this.Item)+'\', 1, '+this.Price.replace(/,/g, "")+');" style="padding-top:0px;" class="mitem is-success is-pulled-right"><i style="color:#23D160" class="far fa-2x fa-plus-square"></i></a><span class="is-pulled-right" style="padding-right:15px;padding-top:4px;"><span class="is-size-7 has-text-grey-light">INR</span> '+this.Price+'  </span><div style="padding-left:2px;"><b>'+suf+''+toTitle(this.Item)+'</b><br/><small>'+this.Caption+'</small></div></li>';
+                }
+            });
+        });
+        //console.log(gmenu);
+        document.getElementById("items").innerHTML = gmenu;
+        $("#wohref").removeClass("is-loading");
+    
+    $("#worefresh").hide();
+    $("#worefresh").click(function(){
+      $("#worefresh").hide();
+      location.reload(true);
+    }); // toggle click to refresh
+    
+     jQuery.expr[':'].icontains = function(a, i, m) {
+      return jQuery(a).text().toUpperCase()
+          .indexOf(m[3].toUpperCase()) >= 0;
+     };
+    
+    $("input#wosearch").keyup(function(){
+      $("li.woitemimage").show();
+      if((this.value).trim() !== ""){
+      $("li.woitemimage:not(:icontains("+this.value+"))").hide();
+      if($('#items li:visible').length == 0){
+        notifyC("0 items", "warning");
+      }
+      }
+    }); 
+    
+    
+    }); // end of document ready
+        
+    </script>
+    
+    <!-- script id="item-template" type="text/x-handlebars-template">
+    <ul style="list-style-type:none;">
+        {{#each this}}
+            <li class="box is-marginless"><b>{{Item}} </b><span style="padding-top:0px;" class="button is-success is-outlined is-pulled-right">Add</span><span class="is-pulled-right" style="padding-right:20px;"><span class="is-size-7 has-text-grey-light">INR</span> {{Price}}  </span></li>
+        {{/each}}
+    </ul>
+    </script -->
+    
+    <style>
+    .woitemimage { background-repeat: no-repeat;background-position:5px; background-size:48px auto;padding-left:58px; }
+    #worefresh{min-width:150px;margin-left:-75px;position:fixed;z-index:1;left:50%;bottom:70px;}
+    input[type=radio]{position:absolute;visibility:hidden;display:none}.rlabel{color:#94edb3;display:inline-block;cursor:pointer;font-weight:700;padding:5px 15px}input[type=radio]:checked+label{color:#fff;background:#22c65b}label+input[type=radio]+label{border-left:solid 2px #22c65b}.radio-group{border:solid 2px #22c65b;display:inline-block;margin:20px 0px;border-radius:10px;overflow:hidden}input::-webkit-inner-spin-button,input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}input[type=number]{-moz-appearance:textfield}
+    </style>
+    
+    </head>
+    <body style="background-color:#f6f6f6;">
+    
+        <div id="footsum" class="card" style="min-width:100%; z-index:100; padding:10px 30px; position:fixed; bottom:0px;display:none;">
+            <div id="wofootsum" class="is-pulled-left" style="margin-top: calc(.300em - 1px);">
+                <!--span class="tag is-rounded is-light is-size-6">4</span> · <small>FRW 1245</small-->
+            </div>
+            <div class="is-pulled-right">
+                <a href="#woorderbox" class="button is-success">
+                <i class="has-text-white fas fa-shopping-cart"></i></a>
+            </div>
+        </div>  
+
+        <section class="section has-background-white">
+            <div class="container">
+                <div class="media">
+        
+                    <div class="media-left">
+                        <img src="https://www.jsilkstonephotography.com/img/s/v-10/p987018393-3.jpg" class="image is-64x64">
+                    </div>
+
+                    <div class="media-content">
+                    
+                        <small class='is-uppercase has-text-grey-light'>Ordene por WhatsApp</small>
+                        <br/>
+                        <h1 class='title has-text-black'>Kitchen J & S</h1>
+                        <h2 class='subtitle has-text-grey-light'>Powai Mumbai-76</h2>
+                        <span class='is-danger tag'>Closed for online ordering</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="padding-top:20px;">
+            <div class="container">
+                <div class="columns">
+                    <div class="column is-two-thirds">
+                        
+                        <div class="tabs has-background-white" style="z-index:100;position:-webkit-sticky;position:sticky;top:0;border-top:#000 solid 1px;">
+                        
+                            <div id="wosearchdiv" class="tabs" style="display:none; margin-bottom:0rem; width:100%;">
+                                <input name="wosearch" id="wosearch" type="text" style="width:100%;border:0;padding-left: calc(.625em - 1px);" placeholder="Escriba su busqueda aqui ...">
+                                <a onclick="showStext();">X</a>
+                            </div>    
+                            
+                            <ul id="catList">
+                                <li style="z-index:100;position:-webkit-sticky;position:sticky;left:0;">
+                                    <a style="border-style:none;" onclick="showStext();">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                </li>
+                                <!-- <li class="is-active"><a>All</a></li -->
+                            </ul>
+                        </div>
+        
+                        <div id="items">Cargando ...</div>
+    
+                    </div>
+                    <div class="column">
+                        <div id="addr" class="box has-background-white">
+                        
+                            <div class="radio-group">
+                                <input type="radio" id="wodel" name="selector" checked onclick="ispickup();" onchange="updateWOaddress();">
+                                <label class="rlabel" for="wodel">Delivery</label>
+                                <input type="radio" id="wopic" name="selector" onclick="ispickup();" onchange="updateWOaddress();">
+                                <label class="rlabel" for="wopic">Recojere</label>
+                            </div>
+        
+                            <h2 class="subtitle" style="margin-bottom:0.5rem;">Nombre y direccion de entrega</h2>
+        
+                            <div class="field">
+                                <label class="label is-marginless">Tu nombre</label>
+                                <input class="input woaddr" type="text" id="woname" onchange="updateWOaddress();">
+                            </div>
+        
+                            <div class="field">      
+                                <label class="label is-marginless">Numero de contacto</label>
+                                <input class="input woaddr" type="number" id="womobile" onchange="updateWOaddress();">
+                            </div>
+        
+                            <div class="field">      
+                                <label class="label is-marginless">Numero de casa#, Edificio, Area</label>
+                                <input class="input woaddr" type="text" id="woaddress" onchange="updateWOaddress();">
+                            </div>
+        
+                            <div class="field">      
+                                <label class="label is-marginless">Lugar de refrencia?</label>
+                                <input class="input woaddr" type="text" id="wolandmark" onchange="updateWOaddress();">
+                            </div>
+                        </div>
+    
+    
+                        <div id="woorderbox" class="box has-background-white">
+                            <h2 class="subtitle">Tu Orden</h2>
+                            <div class="tile is-parent is-vertical" style="padding:0rem;" id="wocart">
+                                <p class='has-text-centered'>Tu carrito esta vacio</p>
+                            </div> <!-- end of cart div -->
+    
+                            <div>
+                                <hr>
+                                <textarea id="wonote" class="textarea" placeholder="Nota" onchange="upLink();"></textarea>
+                            </div>
+                            <div>
+                                <hr>
+                                <a id="wohref" target="_blank" onClick="return checkIt();" class="button is-medium is-fullwidth is-success">Enviar a WhatsApp</a>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+    function ispickup(){
+      let x = document.getElementById('wopic').checked;
+      document.getElementById('woaddress').disabled = x;
+      document.getElementById('wolandmark').disabled = x;
+      updateC();
+    }
+    function buildAddr(waddr){
+       return waddr.name+'%0A'+waddr.contact+(document.getElementById('wopic').checked ? "" :'%0A'+waddr.addr1+'%0A'+waddr.addr2);
+    }
+    
+    function updateWOaddress(){
+    waddr = '';
+    var errC = 0;
+    var inputs = document.getElementsByClassName('woaddr');
+    for (var i = 0; i < inputs.length-1; i += 1) {
+        if(!inputs[i].disabled){
+            if(!inputs[i].value.trim()){
+             errC += 1;
+            }
+        }
+    }
+    if (errC > 0) {
+      //notifyC("Please check address", "warning");
+      return;
+    }
+    waddr = {
+    "name" : inputs[0].value,
+    "contact" : inputs[1].value,
+    "addr1" : inputs[2].value,
+    "addr2" : inputs[3].value
+    };
+    localStorage.woaddress1 = JSON.stringify(waddr);
+    waddr = buildAddr(waddr);
+    
+    updateC();
+    
+    } // end of updateWOaddress
+    
+    
+    /*    
+    var fixmeTop = $('.fixme').offset().top;
+    $(window).scroll(function() {
+        var currentScroll = $(window).scrollTop();
+        if (currentScroll >= fixmeTop) {
+            $('.fixme').css({
+                position: 'fixed',
+                top: '0',
+                width: 'inherit'
+            });
+        } else {
+            $('.fixme').css({
+                position: 'static'
+            });
+        }
+    });
+    */
+    
+    function notifyC(themsg,ntype){
+        //$("#notification").clearQueue();
+        $("#notification").finish();
+        $("#notification").html(themsg);
+        $("#notification").removeClass();
+        $("#notification").addClass("notification");
+        $("#notification").addClass("is-"+ntype);
+        $("#notification").fadeIn().delay(800).fadeOut("slow");
+    }
+    
+    var cartArray = [];
+    
+    function deleteRow(arr, row) {
+       arr = arr.slice(0); // make copy
+       arr.splice(row, 1);
+       return arr;
+    }
+    
+    function updateC(itm,qty,rte){
+    
+    var newA =[itm,qty,rte];
+    const arrayColumn = (arr, n) => arr.map(x => x[n]);
+    cartV = 0;
+    cartM = "";
+    var exists = false;
+    
+    if (itm !== undefined) {
+    //console.log(newA[0]);
+    // start of cartArray modify
+    $.each(cartArray, function (i) {    
+     if(cartArray[i][0].toLowerCase() == newA[0].toLowerCase()){
+         //console.log(i);
+      cartArray[i][1] += newA[1];
+      exists = true;
+        if(cartArray[i][1]<1){
+          cartArray = deleteRow(cartArray, i);
+          return false;
+        }
+     }
+    });
+    
+    if (!exists) {
+         cartArray.push(newA);
+    }
+    // end of cartArray modify
+    }
+    
+    //console.log(arrayColumn(cartArray, 1).reduce((a, b) => a + b, 0)+' items');
+    
+    document.getElementById('wocart').innerHTML = "";
+    
+    $.each(cartArray, function (i) {
+    if(cartArray[i][1]>0){
+    document.getElementById('wocart').innerHTML += '<div class="panel-tabs is-fullhd is-size-6" style="align-items: flex-start;"> <a class="is-pulled-left has-text-black" style="border:0;" onClick="updateC(\''+ cartArray[i][0] + '\',-1,'+ cartArray[i][1] + ');"><i class="far fa-2x fa-minus-square"></i></a><span style="width:200px;padding:8px 2px;">' + '<b class="tag is-medium is-light is-rounded">'+ cartArray[i][1] + '</b> x '+ cartArray[i][0] + '</span> <a class="is-pulled-right has-text-black" style="border:0;" onClick="updateC(\''+ cartArray[i][0] + '\',1,'+ cartArray[i][1] + ');"><i class="far fa-2x fa-plus-square"></i></a> </div><!--hr style="margin: 1rem 0;"/-->';
+    //document.getElementById('wocart').innerHTML += '<a>' + cartArray[i][0] + ' '+ cartArray[i][1] + '</a><br/>';
+        cartV += (cartArray[i][1] * cartArray[i][2]);
+        cartM += cartArray[i][1] + " x " + cartArray[i][0] +  "\r\n";
+    }
+    });
+    
+    if(cartV > 0){
+    var delC = 30;//delC = delC.replace(/,/g, "");
+    delC = parseFloat(delC);
+    delC = (document.getElementById('wopic').checked ? 0 : delC);
+    amtPayable = ((cartV+delC)*perC).toFixed(2);
+    
+    $('#footsum').show();
+    document.getElementById('wofootsum').innerHTML = '<span class="tag is-rounded is-light is-size-6 has-text-weight-bold">'+arrayColumn(cartArray, 1).reduce((a, b) => a + b, 0)+'</span> · <small class="is-size-7 has-text-grey">INR '+amtPayable+'</small>';
+    
+    //console.log(Number.isInteger(perC));
+    //cart total footer below
+    document.getElementById('wocart').innerHTML += "<div class='is-fullhd'><hr style='margin:1rem 0;color:#fff;'/><span class='has-text-weight-semibold is-pulled-left'>Subtotal</span><span class='has-text-weight-semibold is-pulled-right'>INR "+cartV.toFixed(2)+"</span><br/><span class='has-text-weight-normal is-pulled-left'>Delivery</span><span class='has-text-weight-normal is-pulled-right'>"+((delC == 0) ? '-':'INR '+delC.toFixed(2))+"</span><br/><span class='has-text-weight-bold is-pulled-left'>Payable <small class='has-text-weight-light'>(with tax)</small></span><span class='has-text-weight-bold is-pulled-right'>INR "+amtPayable+"</span></div><br/><span class='has-text-grey is-size-7'>Your order is ready to be sent via WhatsApp.</span>";
+    } else {
+        // your cart is empty
+    document.getElementById('wocart').innerHTML += '<p class="has-text-centered">Your cart is empty</p>';
+    $('#footsum').hide();
+    }
+    
+        //waddr = urlencode(toTitle(waddr));
+        //console.log(waddr);
+    
+    upLink();
+    
+    // console.log(cartArray);
+    // update cart
+    notifyC("Cart updated", "info");
+    
+    } // end of updateC
+    
+    function thePaynote(pMode,pNote,pValue){
+        var pCur = 'INR';
+        var payN = 'Cash on delivery';
+        
+        switch(pMode) {
+            case 'Show Note':
+                payN = pNote;
+                break;
+            case 'PayPal - Me':
+                payN = 'Click to pay using PayPal%0Ahttps://paypal.me/'+pNote+'/'+pValue;
+                payN += '%0APlease share screenshot after payment.';
+                break;
+            case 'USSD - Rwanda':
+                var ussdrw = 'amt='+pValue+'&ussdid='+pNote;
+                ussdrw = escape(encodeURI(ussdrw));
+                payN = 'Click to pay using thru USSD%0Ahttps://whatsorder.com/p/ussdrw.php?'+ussdrw;
+                payN += '%0APlease share screenshot after payment.';
+                break;
+            case 'UPI - India':
+                var upivar = 'pn=Kitchen J & S&pa='+pNote+'&tn=WhatsOrder&am='+pValue+'&cu=INR';
+                //console.log(escape(encodeURI(upivar)));
+                upivar = escape(encodeURI(upivar));
+                //upivar = upivar.replace(/&/g,'%26');
+                payN = 'Click to pay using UPI%0Ahttps://whatsorder.com/p/upiin.php?'+upivar;
+                payN += '%0APlease share screenshot after payment.';
+                break;
+            case 'Payment link':
+                payN = 'Please share screenshot after payment.%0A'+pNote;
+                break;
+            case 'Append Amount to Link':
+                payN = 'Please share screenshot after payment.%0A'+ escape(encodeURI(pNote+pValue));
+                break;            
+                
+        } // end of payment mode switch
+        
+        return payN;
+    }
+    
+    function upLink(){
+    var wonote = urlencode(document.getElementById('wonote').value);
+    var jstand = true;
+    if(!jstand){
+        cartM = 'Trial version\nItem ABC x 2\nItem XYZ x 3';
+    }
+    var wlink = "https://api.whatsapp.com/send?phone=919167788249&text=New order "+(document.getElementById('wopic').checked ? '🏬' : '🛵')+" (Kitchen+J+%26+S)%0A%0A" + urlencode(cartM) + "%0APayable: INR " + amtPayable + "%0A";
+    wlink += "%0ADeliver to%0A";
+    wlink += toTitle(waddr).replace(/\x26/,"%26").replace(/\x23/,"%23");
+    wlink += "%0A**"+wonote.replace(/\x26/,"%26").replace(/\x23/,"%23")+"**";
+    wlink += "%0A%0APlease confirm via reply.";
+    if (wlink !== "") {
+        wlink += "%0A%0A-----------------------------%0A(Message for Customer)%0A%0A"+thePaynote(payMode,payNote,amtPayable);
+    }
+    
+    document.getElementById("wohref").setAttribute('href', wlink);
+        
+    } // end of upLink
+    
+    </script>
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-39650120-12"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-39650120-12');
+    </script>
+    
+    <!--script src="https://usemapmojo.com/v1/hello.js"></script-->
+    
+    <div id="notification" class="notification" style="display:none;position:fixed;top:0px;width:100%;z-index:105;"></div>
+    
+    <center><div id="worefresh" class="is-info tag is-size-6">
+    <a class="has-text-white" href="">Click to refresh</a>
+    </div></center>
+    
+    <footer class="footer">
+      <div class="content has-text-grey-lighter has-text-centered">
+        <p>Enabled by <a style="color:#dbdbdb" target="_blank" href="//whatsorder.com?utm_source=wofooter">WhatsOrder</a></p>
+      </div>
+    </footer>
+    
+    </body></html>
+    
+    
