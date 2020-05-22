@@ -51,7 +51,12 @@
             // alert(allRows.length)
             tbody += '<tr '+i+'>';
             for (var key in allRows[i]){
-                tbody += '<td>'+allRows[i][key]+'</td>';
+                if(key=='ItemImageURL'){
+                    tbody += '<td><img src="'+allRows[i][key]+'" /></td>';
+
+                }else{
+                    tbody += '<td>'+allRows[i][key]+'</td>';
+                }
             }
             tbody += '</tr>';
 
