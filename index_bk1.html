@@ -205,7 +205,7 @@
                 } else {
                 suf = "";
                 }
-                gmenu += '<li class="box is-marginless woitemimage" style="background-image: url('+this.ItemImageURL+'); margin-top:5px !important;" data-item='+toTitle(this.Item)+' data-price='+this.Price+'><a onClick="javascript:updateC(\''+toTitle(this.Item)+'\', 1, '+this.Price.replace(/,/g, "")+');" style="padding-top:0px;" class="mitem is-success is-pulled-right"><i style="color:#23D160" class="far fa-2x fa-plus-square"></i></a><span class="is-pulled-right" style="padding-right:15px;padding-top:4px;"><span class="is-size-7 has-text-grey-light">Bs</span> '+this.Price+'  </span><div style="padding-left:2px;"><b>'+suf+''+toTitle(this.Item)+'</b><br/><small>'+this.Caption+'</small></div></li>';
+                gmenu += '<li class="box is-marginless woitemimage" style="background-image: url('+this.ItemImageURL+'); margin-top:5px !important;" data-item='+toTitle(this.Item)+' data-price='+this.Price+'><a onClick="javascript:updateC(\''+toTitle(this.Item)+'\', 1, '+this.Price.replace(/,/g, "")+');" style="padding-top:0px;" class="mitem is-success is-pulled-right"><i style="color:#23D160" class="far fa-2x fa-plus-square"></i></a><span class="is-pulled-right" style="padding-right:15px;padding-top:4px;"><span class="is-size-7 has-text-grey-light">INR</span> '+this.Price+'  </span><div style="padding-left:2px;"><b>'+suf+''+toTitle(this.Item)+'</b><br/><small>'+this.Caption+'</small></div></li>';
                 }
             });
         });
@@ -504,11 +504,11 @@
     amtPayable = ((cartV+delC)*perC).toFixed(2);
     
     $('#footsum').show();
-    document.getElementById('wofootsum').innerHTML = '<span class="tag is-rounded is-light is-size-6 has-text-weight-bold">'+arrayColumn(cartArray, 1).reduce((a, b) => a + b, 0)+'</span> · <small class="is-size-7 has-text-grey">Bs '+amtPayable+'</small>';
+    document.getElementById('wofootsum').innerHTML = '<span class="tag is-rounded is-light is-size-6 has-text-weight-bold">'+arrayColumn(cartArray, 1).reduce((a, b) => a + b, 0)+'</span> · <small class="is-size-7 has-text-grey">INR '+amtPayable+'</small>';
     
     //console.log(Number.isInteger(perC));
     //cart total footer below
-    document.getElementById('wocart').innerHTML += "<div class='is-fullhd'><hr style='margin:1rem 0;color:#fff;'/><span class='has-text-weight-semibold is-pulled-left'>Subtotal</span><span class='has-text-weight-semibold is-pulled-right'>Bs "+cartV.toFixed(2)+"</span><br/><span class='has-text-weight-normal is-pulled-left'>Delivery</span><span class='has-text-weight-normal is-pulled-right'>"+((delC == 0) ? '-':'Bs '+delC.toFixed(2))+"</span><br/><span class='has-text-weight-bold is-pulled-left'>Payable <small class='has-text-weight-light'>(with tax)</small></span><span class='has-text-weight-bold is-pulled-right'>Bs "+amtPayable+"</span></div><br/><span class='has-text-grey is-size-7'>Your order is ready to be sent via WhatsApp.</span>";
+    document.getElementById('wocart').innerHTML += "<div class='is-fullhd'><hr style='margin:1rem 0;color:#fff;'/><span class='has-text-weight-semibold is-pulled-left'>Subtotal</span><span class='has-text-weight-semibold is-pulled-right'>INR "+cartV.toFixed(2)+"</span><br/><span class='has-text-weight-normal is-pulled-left'>Delivery</span><span class='has-text-weight-normal is-pulled-right'>"+((delC == 0) ? '-':'INR '+delC.toFixed(2))+"</span><br/><span class='has-text-weight-bold is-pulled-left'>Payable <small class='has-text-weight-light'>(with tax)</small></span><span class='has-text-weight-bold is-pulled-right'>INR "+amtPayable+"</span></div><br/><span class='has-text-grey is-size-7'>Your order is ready to be sent via WhatsApp.</span>";
     } else {
         // your cart is empty
     document.getElementById('wocart').innerHTML += '<p class="has-text-centered">Your cart is empty</p>';
@@ -527,7 +527,7 @@
     } // end of updateC
     
     function thePaynote(pMode,pNote,pValue){
-        var pCur = 'Bs';
+        var pCur = 'INR';
         var payN = 'Cash on delivery';
         
         switch(pMode) {
@@ -545,7 +545,7 @@
                 payN += '%0APlease share screenshot after payment.';
                 break;
             case 'UPI - India':
-                var upivar = 'pn=Kitchen J & S&pa='+pNote+'&tn=WhatsOrder&am='+pValue+'&cu=Bs';
+                var upivar = 'pn=Kitchen J & S&pa='+pNote+'&tn=WhatsOrder&am='+pValue+'&cu=INR';
                 //console.log(escape(encodeURI(upivar)));
                 upivar = escape(encodeURI(upivar));
                 //upivar = upivar.replace(/&/g,'%26');
