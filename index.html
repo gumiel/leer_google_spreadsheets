@@ -20,52 +20,57 @@
             // successFunction(res)
             var data = $.csv.toObjects(res);
             console.log(data);
+            crearHead(data)
             successFunction(data);
         });
     });
 
-
+    function crearHead(data){
+        var allRows = data;
+        var thead = ''
+        thead += '<tr>';
+        for (var key in allRows[0]) {
+            
+            thead += '    <th>';
+            thead += key;
+            thead += '    </th>';
+        }   
+        thead += '</tr>';
+        $('thead').append(thead);
+    }
 
     function successFunction(data) {
+        
         var allRows = data;
-        var table = '<table>';
-        for (var singleRow = 0; singleRow < allRows.length; singleRow++) {
 
-            if (singleRow === 0) {
-            table += '<thead>';
-            table += '<tr>';
-            } else {
-            table += '<tr>';
-            }
-
-            var rowCells = allRows[singleRow];
+        var tbody = '';
             
-            for (var rowCell = 0; rowCell < rowCells.length; rowCell++) {
-            if (singleRow === 0) {
-                table += '<th>';
-                table += rowCells[rowCell];
-                table += '</th>';
-            } else {
-                table += '<td>';
-                table += rowCells[rowCell];
-                table += '</td>';
+
+        for (var i = 0; i < allRows.length; i++) {
+            
+            // alert(allRows.length)
+            tbody += '<th '+i+'>';
+            for (var key in allRows[i]){
+                tbody += '<td>'+allRows[i][key]+'</td>';
             }
-            }
-            if (singleRow === 0) {
-            table += '</tr>';
-            table += '</thead>';
-            table += '<tbody>';
-            } else {
-            table += '</tr>';
-            }
+            tbody += '</th>';
+
         } 
-        table += '</tbody>';
-        table += '</table>';
-        $('body').append(table);
+
+        $('tbody').append(tbody);
     }
   </script>
 </head>
 <body>
+
+    <table border="1">
+        <thead>
+
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
     
 </body>
 </html>
