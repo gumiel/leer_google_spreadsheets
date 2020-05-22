@@ -49,11 +49,11 @@
         for (var i = 0; i < allRows.length; i++) {
             
             // alert(allRows.length)
-            tbody += '<th '+i+'>';
+            tbody += '<tr '+i+'>';
             for (var key in allRows[i]){
                 tbody += '<td>'+allRows[i][key]+'</td>';
             }
-            tbody += '</th>';
+            tbody += '</tr>';
 
         } 
 
@@ -68,7 +68,7 @@
 
         </thead>
         <tbody>
-
+            
         </tbody>
     </table>
     
