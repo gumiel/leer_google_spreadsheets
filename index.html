@@ -8,13 +8,14 @@
         <meta http-equiv="expires" content="0">
         <meta http-equiv="pragma" content="no-cache">
         <title>Order on WhatsApp from Kitchen J & S</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+        <link rel="stylesheet" href="css/bulma.min.css">
         <!-- script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script defer src="js/all.js"></script>
         <noscript><p>Please enable JavaScript in your browser for use of the website.</p></noscript>
-        <script src="jquery.csv.js"></script>
+        <script src="js/jquery.csv.js"></script>
     <script>
+        var fuera='';
     var view = [
                 {
                     "Item":"Poha",
@@ -30,11 +31,34 @@
     $(document).ready(function(){
         $.ajax({
             url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQD32FS1_p5_js5xJOAHO35K0ush1nVVHpld19TOAdO3BJEXMKDjgdO_rIcOx-iB4hUi5EeokR_qaIZ/pub?output=csv',
+            // url: 'http://127.0.0.1:5500/csv/prueba.csv',
             dataType: 'text',
             async: false,
         }).done(function(res){
+            
+            var newRes='';
+            var bandera=false;
+            var contador = 1;
+
+            var dos = res.split(/\n/g);
+
+            dos.shift();
+            dos.shift();
+            dos.shift();
+            dos.shift();
+            dos.shift();
+            dos.shift();
+            dos.shift();
+            dos.shift();
+            dos.shift();
+            dos.shift();
+            dos.forEach(function(valor){
+                
+                newRes += valor+'\n';
+         
+            });
             // successFunction(res)
-            view = $.csv.toObjects(res);
+            view = $.csv.toObjects(newRes);
 
         });
     });
